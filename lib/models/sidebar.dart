@@ -55,6 +55,6 @@ var sidebarItems = [
             Color(0xFF202A78)
           ]
       ),
-      icon: Icon(Icons.setting, color: Colors.white)
+      icon: Icon(Icons.settings, color: Colors.white)
   ),
 ];
