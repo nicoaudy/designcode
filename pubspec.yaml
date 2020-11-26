@@ -12,8 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   cupertino_icons: ^1.0.1
+  sliding_up_panel: ^1.0.2
 
 dev_dependencies:
   flutter_test:

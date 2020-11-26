@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:designcode/constants.dart';
 import 'package:designcode/screens/sidebar_screen.dart';
 import 'package:designcode/components/home_screen_navbar.dart';
+import 'package:designcode/screens/continue_watching_screen.dart';
 import 'package:designcode/components/lists/recent_course_list.dart';
 import 'package:designcode/components/lists/explore_course_list.dart';
+
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -111,6 +114,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ],
               ),
             ),
+            ContinueWatchingScreen(),
             IgnorePointer(
               ignoring: sidebarHidden,
               child: Stack(children: [
