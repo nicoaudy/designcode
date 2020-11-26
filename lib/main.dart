@@ -1,8 +1,8 @@
-import 'package:designcode/models/course.dart';
 import 'package:flutter/material.dart';
 import 'package:designcode/constants.dart';
 import 'package:designcode/components/home_screen_navbar.dart';
 import 'package:designcode/components/lists/recent_course_list.dart';
+import 'package:designcode/components/lists/explore_course_list.dart';
 
 void main() {
   runApp(MyApp());
@@ -64,33 +64,5 @@ class MyApp extends StatelessWidget {
         ),
       )),
     );
-  }
-}
-
-class ExploreCourseList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 120,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        itemCount: exploreCourses.length,
-        itemBuilder: (context, index) {
-          return ExploreCourseCard(course: exploreCourses[index]);
-        },
-      ),
-    );
-  }
-}
-
-class ExploreCourseCard extends StatelessWidget {
-  ExploreCourseCard({this.course});
-
-  final Course course;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
   }
 }
