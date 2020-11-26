@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(height: 20),
               RecentCourseList()
             ],
           ),
@@ -58,15 +59,23 @@ class _RecentCourseListState extends State<RecentCourseList> {
 
   Widget updateIndicator() {
     return Row(
-        children: recentCourses.map((course) {
-      var index = recentCourses.indexOf(course);
-      return Container(
-        width: 7,
-        height: 7,
-        margin: EdgeInsets.symmetric(horizontal: 6.0),
-        decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
-      );
-    }).toList());
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: recentCourses.map(
+        (course) {
+          var index = recentCourses.indexOf(course);
+          return Container(
+            width: 7,
+            height: 7,
+            margin: EdgeInsets.symmetric(horizontal: 6.0),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color:
+                  currentPage == index ? Color(0xFF0971FE) : Color(0xFFA6AEBD),
+            ),
+          );
+        },
+      ).toList(),
+    );
   }
 
   @override
@@ -78,12 +87,16 @@ class _RecentCourseListState extends State<RecentCourseList> {
           width: double.infinity,
           child: PageView.builder(
             itemBuilder: (context, index) {
-              return RecentCourseCard(
-                course: recentCourses[index],
+              return Opacity(
+                opacity: currentPage == index ? 1.0 : 0.5,
+                child: RecentCourseCard(
+                  course: recentCourses[index],
+                ),
               );
             },
             itemCount: recentCourses.length,
             controller: PageController(initialPage: 0, viewportFraction: 0.63),
+            onPageChanged: (index) => setState(() => currentPage = index),
           ),
         ),
         updateIndicator()
