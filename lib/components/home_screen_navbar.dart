@@ -4,6 +4,10 @@ import 'package:designcode/components/search_field.dart';
 import 'package:designcode/components/sidebar_button.dart';
 
 class HomeScreenNavbar extends StatelessWidget {
+  HomeScreenNavbar({@required this.triggerAnimation});
+
+  final Function triggerAnimation;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -11,7 +15,9 @@ class HomeScreenNavbar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SidebarButton(),
+          SidebarButton(
+            triggerAnimation: triggerAnimation,
+          ),
           SearchFieldWidget(),
           Icon(Icons.notifications, color: kPrimaryLabelColor),
           SizedBox(width: 16),

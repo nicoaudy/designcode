@@ -1,3 +1,4 @@
+import 'package:designcode/screens/sidebar_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:designcode/constants.dart';
 import 'package:designcode/components/home_screen_navbar.dart';
@@ -18,58 +19,100 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
+  Animation<Offset> sidebarAnimation;
+  AnimationController sidebarAnimationController;
+
+  @override
+  void initState() {
+    super.initState();
+    sidebarAnimationController = AnimationController(
+      vsync: this,
+      duration: Duration(
+        milliseconds: 250,
+      ),
+    );
+    sidebarAnimation = Tween<Offset>(
+      begin: Offset(-1, 0),
+      end: Offset(0, 0),
+    ).animate(
+      CurvedAnimation(
+          parent: sidebarAnimationController, curve: Curves.easeInOut),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      color: kBackgroundColor,
-      child: SafeArea(
-        child: Column(
+      body: Container(
+        color: kBackgroundColor,
+        child: Stack(
           children: [
-            HomeScreenNavbar(),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+            SafeArea(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
-                    "Recent",
-                    style: kLargeTitleStyle,
+                  HomeScreenNavbar(
+                    triggerAnimation: () {
+                      sidebarAnimationController.forward();
+                    },
                   ),
-                  SizedBox(
-                    height: 5,
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          "Recent",
+                          style: kLargeTitleStyle,
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "23 courses, more coming",
+                          style: kSubtitleStyle,
+                        )
+                      ],
+                    ),
                   ),
-                  Text(
-                    "23 courses, more coming",
-                    style: kSubtitleStyle,
-                  )
+                  SizedBox(height: 20),
+                  RecentCourseList(),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: 20.0,
+                      right: 20.0,
+                      top: 25.0,
+                      bottom: 16.0,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          "Explore",
+                          style: kTitle1Style,
+                        )
+                      ],
+                    ),
+                  ),
+                  ExploreCourseList(),
                 ],
               ),
             ),
-            SizedBox(height: 20),
-            RecentCourseList(),
-            Padding(
-              padding: EdgeInsets.only(
-                left: 20.0,
-                right: 20.0,
-                top: 25.0,
-                bottom: 16.0,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    "Explore",
-                    style: kTitle1Style,
-                  )
-                ],
+            SlideTransition(
+              position: sidebarAnimation,
+              child: SafeArea(
+                child: SidebarScreen(),
+                bottom: false,
               ),
             ),
-            ExploreCourseList(),
           ],
         ),
       ),
-    ));
+    );
   }
 }
