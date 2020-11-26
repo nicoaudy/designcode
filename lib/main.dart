@@ -19,13 +19,66 @@ class MyApp extends StatelessWidget {
           child: Column(
             children: [
               HomeScreenNavbar(),
-              RecentCourseCard(
-                course: recentCourses[2],
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      "Recent",
+                      style: kLargeTitleStyle,
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      "23 courses, more coming",
+                      style: kSubtitleStyle,
+                    )
+                  ],
+                ),
               ),
+              RecentCourseList()
             ],
           ),
         ),
       )),
+    );
+  }
+}
+
+class RecentCourseList extends StatefulWidget {
+  @override
+  _RecentCourseListState createState() => _RecentCourseListState();
+}
+
+class _RecentCourseListState extends State<RecentCourseList> {
+  List<Container> indicators = [];
+  int currentPage = 0;
+
+  Widget updateIndicator() {
+    return Container();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          height: 320,
+          width: double.infinity,
+          child: PageView.builder(
+            itemBuilder: (context, index) {
+              return RecentCourseCard(
+                course: recentCourses[index],
+              );
+            },
+            itemCount: recentCourses.length,
+            controller: PageController(initialPage: 0, viewportFraction: 0.63),
+          ),
+        ),
+        updateIndicator()
+      ],
     );
   }
 }
