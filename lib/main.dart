@@ -57,7 +57,16 @@ class _RecentCourseListState extends State<RecentCourseList> {
   int currentPage = 0;
 
   Widget updateIndicator() {
-    return Container();
+    return Row(
+        children: recentCourses.map((course) {
+      var index = recentCourses.indexOf(course);
+      return Container(
+        width: 7,
+        height: 7,
+        margin: EdgeInsets.symmetric(horizontal: 6.0),
+        decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
+      );
+    }).toList());
   }
 
   @override
