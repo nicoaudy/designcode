@@ -1,7 +1,7 @@
-import 'package:designcode/components/cards/recent_course_card.dart';
-import 'package:designcode/main.dart';
 import 'package:flutter/material.dart';
 import 'package:designcode/models/course.dart';
+import 'package:designcode/screens/course_screen.dart';
+import 'package:designcode/components/cards/recent_course_card.dart';
 
 class RecentCourseList extends StatefulWidget {
   @override
@@ -46,7 +46,12 @@ class _RecentCourseListState extends State<RecentCourseList> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => CourseScreen()),
+                    MaterialPageRoute(
+                      builder: (context) => CourseScreen(
+                        course: recentCourses[index],
+                      ),
+                      fullscreenDialog: true,
+                    ),
                   );
                 },
                 child: Opacity(
