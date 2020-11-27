@@ -6,8 +6,6 @@ import 'package:designcode/screens/continue_watching_screen.dart';
 import 'package:designcode/components/lists/recent_course_list.dart';
 import 'package:designcode/components/lists/explore_course_list.dart';
 
-import 'package:sliding_up_panel/sliding_up_panel.dart';
-
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -62,56 +60,58 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         child: Stack(
           children: [
             SafeArea(
-              child: Column(
-                children: [
-                  HomeScreenNavbar(
-                    triggerAnimation: () {
-                      setState(() {
-                        sidebarHidden = !sidebarHidden;
-                      });
-                      sidebarAnimationController.forward();
-                    },
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          "Recent",
-                          style: kLargeTitleStyle,
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          "23 courses, more coming",
-                          style: kSubtitleStyle,
-                        )
-                      ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    HomeScreenNavbar(
+                      triggerAnimation: () {
+                        setState(() {
+                          sidebarHidden = !sidebarHidden;
+                        });
+                        sidebarAnimationController.forward();
+                      },
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  RecentCourseList(),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: 20.0,
-                      right: 20.0,
-                      top: 25.0,
-                      bottom: 16.0,
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            "Recent",
+                            style: kLargeTitleStyle,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            "23 courses, more coming",
+                            style: kSubtitleStyle,
+                          )
+                        ],
+                      ),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          "Explore",
-                          style: kTitle1Style,
-                        )
-                      ],
+                    SizedBox(height: 20),
+                    RecentCourseList(),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 20.0,
+                        right: 20.0,
+                        top: 25.0,
+                        bottom: 16.0,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Text(
+                            "Explore",
+                            style: kTitle1Style,
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  ExploreCourseList(),
-                ],
+                    ExploreCourseList(),
+                  ],
+                ),
               ),
             ),
             ContinueWatchingScreen(),
