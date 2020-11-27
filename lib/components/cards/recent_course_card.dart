@@ -3,7 +3,7 @@ import 'package:designcode/constants.dart';
 import 'package:designcode/models/course.dart';
 
 class RecentCourseCard extends StatelessWidget {
-  RecentCourseCard({ this.course });
+  RecentCourseCard({this.course});
 
   Course course;
 
@@ -24,40 +24,44 @@ class RecentCourseCard extends StatelessWidget {
                   BoxShadow(
                       color: course.background.colors[0].withOpacity(0.3),
                       offset: Offset(0, 20),
-                      blurRadius: 30.0
-                  ),
+                      blurRadius: 30.0),
                   BoxShadow(
                       color: course.background.colors[1].withOpacity(0.3),
                       offset: Offset(0, 20),
-                      blurRadius: 30.0
-                  )
-                ]
-            ),
+                      blurRadius: 30.0)
+                ]),
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.only(
-                      top: 32.0,
-                      left: 32.0,
-                      right: 32.0
-                  ),
+                  padding: EdgeInsets.only(top: 32.0, left: 32.0, right: 32.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        course.courseSubtitle,
-                        style: kCardSubtitleStyle,
+                      Hero(
+                        tag: course.courseSubtitle,
+                        child: Text(
+                          course.courseSubtitle,
+                          style: kCardSubtitleStyle,
+                        ),
                       ),
                       SizedBox(height: 6),
-                      Text(
-                        course.courseTitle,
-                        style: kCardTitleStyle,
+                      Hero(
+                        tag: course.courseTitle,
+                        child: Text(
+                          course.courseTitle,
+                          style: kCardTitleStyle,
+                        ),
                       )
                     ],
                   ),
                 ),
                 Expanded(
-                  child: Image.asset('asset/illustrations/${course.illustration}', fit: BoxFit.cover),
+                  child: Hero(
+                    tag: course.illustration,
+                    child: Image.asset(
+                        'asset/illustrations/${course.illustration}',
+                        fit: BoxFit.cover),
+                  ),
                 ),
               ],
             ),
@@ -66,16 +70,21 @@ class RecentCourseCard extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(right: 42),
           child: Container(
-            child: Image.asset('asset/logos/${course.logo}'),
+            child: Hero(
+              tag: course.logo,
+              child: Image.asset('asset/logos/${course.logo}'),
+            ),
             width: 60,
             height: 60,
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(18.0),
                 boxShadow: [
-                  BoxShadow(color: kShadowColor, offset: Offset(0, 4), blurRadius: 16.0)
-                ]
-            ),
+                  BoxShadow(
+                      color: kShadowColor,
+                      offset: Offset(0, 4),
+                      blurRadius: 16.0)
+                ]),
             padding: EdgeInsets.all(12.0),
           ),
         )

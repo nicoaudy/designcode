@@ -58,8 +58,11 @@ class _CourseScreenState extends State<CourseScreen> {
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(18.0),
                                     ),
-                                    child: Image.asset(
-                                      'asset/logos/${widget.course.logo}',
+                                    child: Hero(
+                                      tag: widget.course.logo,
+                                      child: Image.asset(
+                                        'asset/logos/${widget.course.logo}',
+                                      ),
                                     ),
                                   ),
                                   SizedBox(width: 20),
@@ -68,15 +71,22 @@ class _CourseScreenState extends State<CourseScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          widget.course.courseSubtitle,
-                                          style: kSecondaryCalloutLabelStyle
-                                              .copyWith(color: Colors.white70),
+                                        Hero(
+                                          tag: widget.course.courseSubtitle,
+                                          child: Text(
+                                            widget.course.courseSubtitle,
+                                            style: kSecondaryCalloutLabelStyle
+                                                .copyWith(
+                                                    color: Colors.white70),
+                                          ),
                                         ),
-                                        Text(
-                                          widget.course.courseTitle,
-                                          style: kLargeTitleStyle.copyWith(
-                                              color: Colors.white),
+                                        Hero(
+                                          tag: widget.course.courseTitle,
+                                          child: Text(
+                                            widget.course.courseTitle,
+                                            style: kLargeTitleStyle.copyWith(
+                                                color: Colors.white),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -105,11 +115,14 @@ class _CourseScreenState extends State<CourseScreen> {
                             ),
                             SizedBox(height: 28.0),
                             Expanded(
-                              child: Image.asset(
-                                'asset/illustrations/${widget.course.illustration}',
-                                fit: BoxFit.cover,
-                                alignment: Alignment.topCenter,
-                                width: MediaQuery.of(context).size.width,
+                              child: Hero(
+                                tag: widget.course.illustration,
+                                child: Image.asset(
+                                  'asset/illustrations/${widget.course.illustration}',
+                                  fit: BoxFit.cover,
+                                  alignment: Alignment.topCenter,
+                                  width: MediaQuery.of(context).size.width,
+                                ),
                               ),
                             )
                           ],
