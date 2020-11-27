@@ -1,4 +1,5 @@
 import 'package:designcode/components/cards/recent_course_card.dart';
+import 'package:designcode/main.dart';
 import 'package:flutter/material.dart';
 import 'package:designcode/models/course.dart';
 
@@ -41,10 +42,18 @@ class _RecentCourseListState extends State<RecentCourseList> {
           width: double.infinity,
           child: PageView.builder(
             itemBuilder: (context, index) {
-              return Opacity(
-                opacity: currentPage == index ? 1.0 : 0.5,
-                child: RecentCourseCard(
-                  course: recentCourses[index],
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CourseScreen()),
+                  );
+                },
+                child: Opacity(
+                  opacity: currentPage == index ? 1.0 : 0.5,
+                  child: RecentCourseCard(
+                    course: recentCourses[index],
+                  ),
                 ),
               );
             },
