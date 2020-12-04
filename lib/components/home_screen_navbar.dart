@@ -1,3 +1,4 @@
+import 'package:designcode/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:designcode/constants.dart';
 import 'package:designcode/components/search_field.dart';
@@ -21,9 +22,16 @@ class HomeScreenNavbar extends StatelessWidget {
           SearchFieldWidget(),
           Icon(Icons.notifications, color: kPrimaryLabelColor),
           SizedBox(width: 16),
-          CircleAvatar(
-            radius: 18.0,
-            backgroundImage: AssetImage('asset/images/profile.jpg'),
+          GestureDetector(
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ProfileScreen(),
+              ),
+            ),
+            child: CircleAvatar(
+              radius: 18.0,
+              backgroundImage: AssetImage('asset/images/profile.jpg'),
+            ),
           ),
         ],
       ),
